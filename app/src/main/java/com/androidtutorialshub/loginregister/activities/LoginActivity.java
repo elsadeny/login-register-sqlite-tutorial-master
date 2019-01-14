@@ -59,6 +59,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         myPref = new MyPref(this);
         //SendMail sendMail = new SendMail();
         //sendMail.sendMailSSL();
+        if(myPref.isLoggedIn())
+        {
+            startActivity(new Intent(this,MainActivity.class));
+            finish();
+        }
     }
 
     /**

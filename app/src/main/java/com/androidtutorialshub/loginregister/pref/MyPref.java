@@ -27,6 +27,17 @@ public class MyPref {
         editor.putString("password",password);
         editor.commit();
     }
+
+    public boolean isLoggedIn()
+    {
+        if(sharedPreferences.getString("email",null)!=null)
+        {
+            return true;
+        }else
+            return false;
+    }
+
+
     public Map<String,String> getUser()
     {
         Map<String,String > map = new HashMap<>();

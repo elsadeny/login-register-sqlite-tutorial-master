@@ -1,5 +1,6 @@
 package com.androidtutorialshub.loginregister.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,10 +9,14 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.androidtutorialshub.loginregister.R;
 import com.androidtutorialshub.loginregister.helpers.InputValidation;
@@ -21,6 +26,8 @@ import com.androidtutorialshub.loginregister.sql.DatabaseHelper;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static java.security.AccessController.getContext;
 
 /**
  * Created by lalit on 8/27/2016.
@@ -157,8 +164,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             verifyMessage();
 
             // Snack Bar to show success message that record saved successfully
-            Snackbar.make(nestedScrollView, getString(R.string.success_message), Snackbar.LENGTH_LONG).show();
-            emptyInputEditText();
+           // Snackbar.make(nestedScrollView, getString(R.string.success_message), Snackbar.LENGTH_LONG).show();
+           // emptyInputEditText();
+
+
 
 
         } else {
@@ -167,6 +176,38 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
 
 
+    }
+
+    public void showDialog()
+    {
+        //Toast.makeText(getApplicationContext(),"YOu're in a way", Toast.LENGTH_LONG).show();
+        LayoutInflater inflater =getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.pin_chk,null);
+        final EditText pin= alertLayout.findViewById(R.id.input);
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Confirm Payment by password");
+        alert.setView(alertLayout);
+        alert.setPositiveButton("confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                fun_continue(pin.getText().toString());
+            }
+        });
+        alert.create();
+        alert.show();
+    }
+
+    public void fun_continue(String pin)
+    {
+        if(Long.getLong(pin)==myPref.getMyPin())
+        {
+            startActivity(new Intent(this,MainActivity.class));
+            finish();
+        }
+        else
+        {
+            Snackbar.make(nestedScrollView, getString(R.string.success_message), Snackbar.LENGTH_LONG).show();
+        }
     }
 
     public void verifyMessage()
@@ -181,6 +222,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         intent.putExtra(Intent.EXTRA_EMAIL,user.getEmail() );
         intent.putExtra(Intent.EXTRA_SUBJECT, "Email verification");
         intent.putExtra(Intent.EXTRA_TEXT, pin);
+        myPref.setMyPin(Long.getLong(pin));
 
         startActivity(Intent.createChooser(intent, "Send Email"));
     }

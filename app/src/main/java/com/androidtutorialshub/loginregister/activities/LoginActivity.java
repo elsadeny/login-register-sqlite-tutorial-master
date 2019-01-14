@@ -57,8 +57,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         initObjects();
 
         myPref = new MyPref(this);
-        SendMail sendMail = new SendMail();
-        sendMail.sendMailSSL();
+        //SendMail sendMail = new SendMail();
+        //sendMail.sendMailSSL();
     }
 
     /**

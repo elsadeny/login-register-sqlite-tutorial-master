@@ -199,7 +199,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     public void fun_continue(String pin)
     {
-        if(Long.getLong(pin)==myPref.getMyPin())
+        if(pin.equals(myPref.getMyPin()))
         {
             startActivity(new Intent(this,MainActivity.class));
             finish();
@@ -222,9 +222,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         intent.putExtra(Intent.EXTRA_EMAIL,user.getEmail() );
         intent.putExtra(Intent.EXTRA_SUBJECT, "Email verification");
         intent.putExtra(Intent.EXTRA_TEXT, pin);
-        myPref.setMyPin(Long.getLong(pin));
+        myPref.setMyPin(pin);
 
-        startActivity(Intent.createChooser(intent, "Send Email"));
+        showDialog();
     }
 
     /**

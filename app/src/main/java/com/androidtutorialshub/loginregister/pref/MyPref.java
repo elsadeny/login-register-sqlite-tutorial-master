@@ -45,13 +45,13 @@ public class MyPref {
         map.put("passoword",sharedPreferences.getString("password",null));
         return map;
     }
-    public long getMyPin()
+    public String getMyPin()
     {
-        return sharedPreferences.getLong("pin",0000);
+        return sharedPreferences.getString("pin",null);
     }
-    public void setMyPin(Long pin)
+    public void setMyPin(String pin)
     {
-        editor.putLong("pin",pin);
+        editor.putString("pin",pin);
         editor.commit();
     }
 }

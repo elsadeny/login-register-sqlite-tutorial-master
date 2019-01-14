@@ -40,6 +40,7 @@ public class MyPref {
     public void logout()
     {
         editor.clear();
+        editor.commit();
     }
 
     public Map<String,String> getUser()

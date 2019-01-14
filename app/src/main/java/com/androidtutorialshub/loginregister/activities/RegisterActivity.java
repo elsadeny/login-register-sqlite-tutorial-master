@@ -1,5 +1,6 @@
 package com.androidtutorialshub.loginregister.activities;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,16 +14,21 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.androidtutorialshub.loginregister.R;
 import com.androidtutorialshub.loginregister.helpers.InputValidation;
 import com.androidtutorialshub.loginregister.model.User;
 import com.androidtutorialshub.loginregister.pref.MyPref;
 import com.androidtutorialshub.loginregister.sql.DatabaseHelper;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -181,21 +187,25 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void showDialog()
     {
         //Toast.makeText(getApplicationContext(),"YOu're in a way", Toast.LENGTH_LONG).show();
-        LayoutInflater inflater =getLayoutInflater();
+        LayoutInflater inflater =LayoutInflater.from(getApplicationContext());
         View alertLayout = inflater.inflate(R.layout.pin_chk,null);
-        final EditText pin= alertLayout.findViewById(R.id.input);
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("Confirm Payment by password");
+        //View viewInfrared = LayoutInflater.from(getAppli;
+        final EditText pass= alertLayout.findViewById(R.id.input);
+        final AlertDialog.Builder alert = new AlertDialog.Builder(RegisterActivity.this);
+        ;
         alert.setView(alertLayout);
-        alert.setPositiveButton("confirm", new DialogInterface.OnClickListener() {
+        alert.setTitle("Confirm pim");
+        alert.setMessage("input the pin");
+        alert.setCancelable(true);
+        alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                fun_continue(pin.getText().toString());
+                fun_continue(pass.getText().toString());
             }
-        });
-        alert.create();
-        alert.show();
-    }
+    });
+      AlertDialog nalert = alert.create();
+        nalert.show();
+        }
 
     public void fun_continue(String pin)
     {

@@ -6,12 +6,11 @@
     android:layout_height="match_parent">
 
 
-
     <EditText
         android:id="@+id/input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
+        android:inputType="numberSigned"
         android:singleLine="true" />
 
 </LinearLayout>

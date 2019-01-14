@@ -43,6 +43,7 @@ implements View.OnClickListener
     {
         if(view == btnLogout)
         {
+            myPref.logout();
             startActivity(new Intent(this,LoginActivity.class));
             finish();
         }

@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import com.androidtutorialshub.loginregister.R;
 import com.androidtutorialshub.loginregister.adapters.UsersRecyclerAdapter;
 import com.androidtutorialshub.loginregister.model.User;
+import com.androidtutorialshub.loginregister.pref.MyPref;
 import com.androidtutorialshub.loginregister.sql.DatabaseHelper;
 
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class UsersListActivity extends AppCompatActivity {
     private List<User> listUsers;
     private UsersRecyclerAdapter usersRecyclerAdapter;
     private DatabaseHelper databaseHelper;
+    MyPref myPref;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,7 +44,7 @@ public class UsersListActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         initViews();
         initObjects();
-
+        myPref =  new MyPref(this);
     }
 
     /**
@@ -109,6 +111,7 @@ public class UsersListActivity extends AppCompatActivity {
         switch(id)
         {
             case R.id.action_logout:
+                myPref.logout();
                 startActivity(new Intent(this,LoginActivity.class));
                 finish();
                 break;

@@ -37,6 +37,10 @@ public class MyPref {
             return false;
     }
 
+    public void logout()
+    {
+        editor.clear();
+    }
 
     public Map<String,String> getUser()
     {
